@@ -22,15 +22,17 @@ classe-> prodotti
     -descrizione
     -img prodotto
 
+
+
+type potrebbe essere in product
 classe-> cani
     classe-> cibo
         -ingredienti
-        -descrizione breve
-        -categoria (secco, umido)
+        -categoria (tipo più che categoria) (secco, umido)
         -formato (es: peso 1kg, 2kg)
 
     classe-> toys
-        -categorie (palline, corde)
+        -categorie (palline, corde (riporto, masticamento))
         -materiali (stoffa, gomma, nylon)
 
     classe-> cucce
