@@ -47,11 +47,27 @@
         public $format;
 
         function __construct(
+            string $category,
+            string $name,
+            float $price,
+            string $brand,
+            string $productCode,
+            string $productDescription,
+            string $productImg,
+
             array $ingredients,
             string $type,
             string $format
         ){
-            parent:: __construct();
+            parent:: __construct(
+                $category,
+                $name,
+                $price,
+                $brand,
+                $productCode,
+                $productDescription,
+                $productImg
+            );
             $this->ingredients = $ingredients;  
             $this->type = $type;  
             $this->format = $format;  
