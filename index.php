@@ -93,6 +93,49 @@
 
     var_dump($newExampleProduct);
 
+    class Toy extends Product {
+        public $type;
+        public $materials;
+
+        function __construct(
+            string $category,
+            string $name,
+            float $price,
+            string $brand,
+            string $productCode,
+            string $productDescription,
+            string $productImg,
+
+            string $type,
+            string $materials
+        ){
+            parent:: __construct(
+                $category,
+                $name,
+                $price,
+                $brand,
+                $productCode,
+                $productDescription,
+                $productImg
+            ); 
+            $this->type = $type;  
+            $this->materials = $materials;  
+        }
+    }
+
+    $newExampleToy = new Toy(
+        "dogs",
+        "Gioco per cani in osso",
+        3.50,
+        "Camon",
+        "A123b456",
+        "lorem ipsum dolor",
+        "URL IMMAGINE PRODOTTO",
+        "chewing",
+        "bone"
+    );
+
+    var_dump($newExampleToy);
 
     // class Toys extends Product {
     //     public $type;
