@@ -1,6 +1,24 @@
 <?php
+    class Category {
+        public $name;
+        public $icon;
+
+        public function __construct(
+            string $name,
+            string $icon,
+        ){
+            $this->name = $name;
+            $this->icon = $icon;  
+        }
+    }
+    $cani = new Category('Cani', 'cani_icona');
+    $gatti = new Category('Gatti', 'gatti_icona');
+    var_dump($cani);
+    var_dump($gatti);
+
+//rivedere lezione per category
     class Product {
-        public $category;
+        protected $category;
         public $name;
         public $price;
         public $brand;
@@ -10,7 +28,7 @@
         
         //costruttore prodotto
         public function __construct(
-            string $category,
+            Category $category, //qui errore
             string $name,
             float $price,
             string $brand,
@@ -18,7 +36,7 @@
             string $productDescription,
             string $productImg
         ) {
-            $this->category = $category;
+            $this->setCategory($category);
             $this->name = $name;
             $this->price = $price;
             $this->brand = $brand;
@@ -26,20 +44,39 @@
             $this->productDescription = $productDescription;
             $this->productImg = $productImg;
         }
-        // public function poiSiVede() {
+        public function setCategory(Category $category) {
 
-        // }
+            $this->category = $category;
+            // $categories = [
+            //     'cani',
+            //     'gatti'
+            // ];
+            // if(
+            //     is_string($category)
+            //     &&
+            //     in_array($category, $categories)
+            // ) {
+            //     $this->category = $category;
+            // }
+            // else {
+            //     $this->category = null;
+            // }
+
+        }
     }
-    $exampleProduct = new Product("dogs","Dog Puppy Mini", 23.60, "Royal Canin", "A123b456", "lorem ipsum dolor", "URL IMMAGINE PRODOTTO");
-    var_dump($exampleProduct);
 
-    // non ha senso
-    // class Dogs extends Product {
-    //     queste dovrebbero essere classi
-    //     public $food;
-    //     public $toys;
-    //     public $kennels;
-    // }
+    
+
+    $exampleProduct = new Product(
+        $cani,
+        "Dog Puppy Mini",
+        23.60,
+        "Royal Canin",
+        "A123b456",
+        "lorem ipsum dolor",
+        "URL IMMAGINE PRODOTTO"
+    );
+    var_dump($exampleProduct);
 
     class Food extends Product {
         public $ingredients;
@@ -47,7 +84,7 @@
         public $format;
 
         function __construct(
-            string $category,
+            Category $category,
             string $name,
             float $price,
             string $brand,
@@ -74,7 +111,7 @@
         }
     }
     $newExampleProduct = new Food(
-        "dogs",
+        $cani,
         "Dog Puppy Mini",
         23.60,
         "Royal Canin",
@@ -98,7 +135,7 @@
         public $materials;
 
         function __construct(
-            string $category,
+            Category $category,
             string $name,
             float $price,
             string $brand,
@@ -124,7 +161,7 @@
     }
 
     $newExampleToy = new Toy(
-        "dogs",
+        $cani,
         "Gioco per cani in osso",
         3.50,
         "Camon",
