@@ -28,7 +28,7 @@
         
         //costruttore prodotto
         public function __construct(
-            Category $category, //qui errore
+            Category $category,
             string $name,
             float $price,
             string $brand,
@@ -45,23 +45,10 @@
             $this->productImg = $productImg;
         }
         public function setCategory(Category $category) {
-
             $this->category = $category;
-            // $categories = [
-            //     'cani',
-            //     'gatti'
-            // ];
-            // if(
-            //     is_string($category)
-            //     &&
-            //     in_array($category, $categories)
-            // ) {
-            //     $this->category = $category;
-            // }
-            // else {
-            //     $this->category = null;
-            // }
-
+        }
+        public function getCategory() {
+            return $this->category;
         }
     }
 
@@ -74,7 +61,7 @@
         "Royal Canin",
         "A123b456",
         "lorem ipsum dolor",
-        "URL IMMAGINE PRODOTTO"
+        "https://www.agrizoo2.it/wp-content/uploads/2021/08/rc_spt_dry_minipuppy_mv_2_it_it_1__0-250x250.jpg"
     );
     var_dump($exampleProduct);
 
@@ -112,12 +99,12 @@
     }
     $newExampleProduct = new Food(
         $cani,
-        "Dog Puppy Mini",
+        "Dog Puppy Pollo",
         23.60,
         "Royal Canin",
         "A123b456",
         "lorem ipsum dolor",
-        "URL IMMAGINE PRODOTTO",
+        "https://www.villaggionatura.com/shop/4820-large_default/royal-canin-x-small-adult-15-kg.jpg",
         [
             "pollo",
             "grano",
@@ -161,32 +148,24 @@
     }
 
     $newExampleToy = new Toy(
-        $cani,
-        "Gioco per cani in osso",
+        $gatti,
+        "Gioco per gatti in tessuto",
         3.50,
         "Camon",
         "A123b456",
         "lorem ipsum dolor",
-        "URL IMMAGINE PRODOTTO",
+        "https://raofarmaceutici.it/32937-large_default/mix-lisca-gioco-gatto-15cm.jpg",
         "chewing",
-        "bone"
+        "fabric"
     );
 
     var_dump($newExampleToy);
 
-    // class Toys extends Product {
-    //     public $type;
-    //     public $materials;
-    // }
-    // class Kennels extends Product {
-    //     public $type;
-    //     public $size;
-    // }
-    // class Pesticides extends Product {
-    //     public $type;
-    // }
-
-
+    $products = [
+        $newExampleProduct,
+        $newExampleToy,
+        $exampleProduct
+    ]
 ?>
 
 
@@ -201,5 +180,43 @@
         <h1>
              PHP OOP 2
         </h1>
+        <div>
+            <?php
+                foreach ($products as $product) {  
+            ?>
+                <!-- <img src="<?php echo $product->productImg ?>" alt=""> -->
+                <h2>
+                    <?php echo $product->name ?>
+                </h2>
+                <h3>
+                    <?php echo number_format($product->price, 2, ',', '.') ?>
+                </h3>
+                <h4>
+                    <?php echo $product->brand ?>
+                </h4>
+                <h4>
+                    <?php echo $product->getCategory()->name ?>
+                </h4>
+                <h4>
+                    <?php $productClass = get_class($product);
+                        if ($productClass === 'Product') {
+                            echo 'Prodotto generico';
+                        }
+                        else if ($productClass === 'Food') {
+                            echo 'Cibo e mangimi';
+                        }
+                        else if ($productClass === 'Toy') {
+                            echo 'Giochi e attrezzature';
+                        }
+                    
+                    ?>
+                </h4>
+
+                <?php echo '<hr/>' ?>
+                
+            <?php
+                }
+            ?>
+        </div>
     </body>
 </html>
