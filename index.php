@@ -16,6 +16,19 @@
     var_dump($cani);
     var_dump($gatti);
 
+    //trait
+    trait Image {
+        public $imgUrl;
+
+        public function getImage(){
+            return $this->imgUrl;
+        }
+        public function setImage($imgUrl){
+            $this->imgUrl = $imageUrl;
+        }
+        
+    }
+    
 //rivedere lezione per category
     class Product {
         protected $category;
@@ -24,7 +37,7 @@
         public $brand;
         public $productCode;
         public $productDescription;
-        public $productImg;
+        use Image;
         
         //costruttore prodotto
         public function __construct(
@@ -34,7 +47,7 @@
             string $brand,
             string $productCode,
             string $productDescription,
-            string $productImg
+            string $imgUrl
         ) {
             $this->setCategory($category);
             $this->name = $name;
@@ -42,7 +55,7 @@
             $this->brand = $brand;
             $this->productCode = $productCode;
             $this->productDescription = $productDescription;
-            $this->productImg = $productImg;
+            $this->imgUrl = $imgUrl;
         }
         public function setCategory(Category $category) {
             $this->category = $category;
@@ -77,7 +90,7 @@
             string $brand,
             string $productCode,
             string $productDescription,
-            string $productImg,
+            string $imgUrl,
 
             array $ingredients,
             string $type,
@@ -90,7 +103,7 @@
                 $brand,
                 $productCode,
                 $productDescription,
-                $productImg
+                $imgUrl
             );
             $this->ingredients = $ingredients;  
             $this->type = $type;  
@@ -128,7 +141,7 @@
             string $brand,
             string $productCode,
             string $productDescription,
-            string $productImg,
+            string $imgUrl,
 
             string $type,
             string $materials
@@ -140,7 +153,7 @@
                 $brand,
                 $productCode,
                 $productDescription,
-                $productImg
+                $imgUrl
             ); 
             $this->type = $type;  
             $this->materials = $materials;  
@@ -165,7 +178,8 @@
         $newExampleProduct,
         $newExampleToy,
         $exampleProduct
-    ]
+    ];
+    
 ?>
 
 
@@ -174,45 +188,51 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <title>PHP OOP 2</title>
     </head>
     <body>
         <h1>
              PHP OOP 2
         </h1>
-        <div>
+        <div class="row">
             <?php
                 foreach ($products as $product) {  
             ?>
-                <!-- <img src="<?php echo $product->productImg ?>" alt=""> -->
-                <h2>
-                    <?php echo $product->name ?>
-                </h2>
-                <h3>
-                    <?php echo number_format($product->price, 2, ',', '.') ?>
-                </h3>
-                <h4>
-                    <?php echo $product->brand ?>
-                </h4>
-                <h4>
-                    <?php echo $product->getCategory()->name ?>
-                </h4>
-                <h4>
-                    <?php $productClass = get_class($product);
-                        if ($productClass === 'Product') {
-                            echo 'Prodotto generico';
-                        }
-                        else if ($productClass === 'Food') {
-                            echo 'Cibo e mangimi';
-                        }
-                        else if ($productClass === 'Toy') {
-                            echo 'Giochi e attrezzature';
-                        }
-                    
-                    ?>
-                </h4>
+                <div class="col-3">
+                    <div class="card p-3">
+                        <img class="card-img-top" src="<?php echo $product->productImg ?>" alt="">
+                        <h2>
+                            <?php echo $product->name ?>
+                        </h2>
+                        <h3>
+                            <?php echo number_format($product->price, 2, ',', '.') ?>
+                        </h3>
+                        <h4>
+                            <?php echo $product->brand ?>
+                        </h4>
+                        <h4>
+                            <?php echo $product->getCategory()->name ?>
+                        </h4>
+                        <h4>
+                            <?php $productClass = get_class($product);
+                                if ($productClass === 'Product') {
+                                    echo 'Prodotto generico';
+                                }
+                                else if ($productClass === 'Food') {
+                                    echo 'Cibo e mangimi';
+                                }
+                                else if ($productClass === 'Toy') {
+                                    echo 'Giochi e attrezzature';
+                                }
+                            
+                            ?>
+                        </h4>
 
-                <?php echo '<hr/>' ?>
+                        
+                    </div>
+                </div>
                 
             <?php
                 }
