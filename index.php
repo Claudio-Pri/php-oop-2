@@ -23,7 +23,7 @@
         public function getImage(){
             return $this->imgUrl;
         }
-        public function setImage($imgUrl){
+        public function setImage($imageUrl){
             $this->imgUrl = $imageUrl;
         }
         
@@ -48,6 +48,7 @@
             string $productCode,
             string $productDescription,
             string $imgUrl
+            
         ) {
             $this->setCategory($category);
             $this->name = $name;
@@ -55,7 +56,8 @@
             $this->brand = $brand;
             $this->productCode = $productCode;
             $this->productDescription = $productDescription;
-            $this->imgUrl = $imgUrl;
+            $this->setImage($imgUrl);
+            
         }
         public function setCategory(Category $category) {
             $this->category = $category;
@@ -92,6 +94,8 @@
             string $productDescription,
             string $imgUrl,
 
+            
+
             array $ingredients,
             string $type,
             string $format
@@ -104,6 +108,7 @@
                 $productCode,
                 $productDescription,
                 $imgUrl
+                
             );
             $this->ingredients = $ingredients;  
             $this->type = $type;  
@@ -143,6 +148,8 @@
             string $productDescription,
             string $imgUrl,
 
+            
+
             string $type,
             string $materials
         ){
@@ -154,6 +161,8 @@
                 $productCode,
                 $productDescription,
                 $imgUrl
+
+                
             ); 
             $this->type = $type;  
             $this->materials = $materials;  
@@ -202,7 +211,7 @@
             ?>
                 <div class="col-3">
                     <div class="card p-3">
-                        <img class="card-img-top" src="<?php echo $product->productImg ?>" alt="">
+                        <img class="card-img-top" src="<?php echo $product->imgUrl ?>" alt="">
                         <h2>
                             <?php echo $product->name ?>
                         </h2>
